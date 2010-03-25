@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="unibasSsorbWrapper/unibasUnibasSsorbWrapper.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/unibasSsorbWrapper/unibasSsorbWrapper.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="/unibasSsorbWrapper/src/META-INF/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=SSORB/src&lt;ch.unibas.spectrum.ssorb.exception"/>
+        <folder path="/SSORB/src/META-INF"/>
+        <javaElement handleIdentifier="=SSORB/src&lt;ch.unibas.spectrum.ssorb.model"/>
+        <javaElement handleIdentifier="=SSORB/src&lt;ch.unibas.spectrum.ssorb.logger"/>
+        <javaElement handleIdentifier="=SSORB/src&lt;ch.unibas.spectrum.ssorb.constants"/>
+        <javaElement handleIdentifier="=SSORB/src&lt;ch.unibas.spectrum.ssorb.access"/>
+        <javaElement handleIdentifier="=SSORB/src&lt;ch.unibas.spectrum.ssorb.helper"/>
+    </selectedElements>
+</jardesc>

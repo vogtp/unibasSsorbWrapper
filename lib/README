@@ -1,0 +1,29 @@
+You have to copy the following jars from you spectrum installation ($SPEC_ROOT/SDK/lib/)
+or add them to the build path.  This list is not tuned, some of the jars might not be needed.
+
+clientapp.jar
+ems90.jar
+global90.jar
+jsafeJCEFIPS.jar
+lm.jar
+mindterm.jar
+modelinggateway90.jar
+mte.jar
+ncm90.jar
+omi90.jar
+processd.jar
+productsuite90.jar
+sanct6.jar
+sanctuary.jar
+sbgwimport90.jar
+snmpsrv90.jar
+ssorb90.jar
+ssorbutil90.jar
+util90.jar
+utilapp90.jar
+utilgui90.jar
+utilnet90.jar
+utilsrv90.jar
+vbhelper90.jar
+vbjorb.jar
+vbsec.jar
