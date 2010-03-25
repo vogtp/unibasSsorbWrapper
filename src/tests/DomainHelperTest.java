@@ -3,6 +3,8 @@ package tests;
 import junit.framework.TestCase;
 import ch.unibas.spectrum.ssorb.helper.DomainHelper;
 
+import com.aprisma.spectrum.core.idl.CsCModelDomain;
+
 public class DomainHelperTest extends TestCase {
 
 	private CsCModelDomain modelDomain;

@@ -7,6 +7,8 @@ import ch.unibas.spectrum.ssorb.access.ModelAccess;
 import ch.unibas.spectrum.ssorb.exception.SSOrbConnectException;
 import ch.unibas.spectrum.ssorb.model.Model;
 
+import com.aprisma.spectrum.core.idl.CsCException.CsCSpectrumException;
+
 public class ModelAccessTest extends TestCase {
 
 	protected void setUp() throws Exception {
