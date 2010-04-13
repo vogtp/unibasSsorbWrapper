@@ -23,16 +23,16 @@ public class ServiceAccess extends ModelAccess {
 		return new ServiceModel(modelID);
 	}
 
-	public static Map<String, Model> getChildren(ServiceModel service) throws CsCSpectrumException, SSOrbConnectException {
-		int[] assciationsIDs = RelationHelper.getAssciationsIDs(service.getID(), Relations.SlmContains);
+	public static Map<String, Model> getServiceChildren(ServiceModel service) throws CsCSpectrumException, SSOrbConnectException {
+		int[] assciationsIDs = RelationHelper.getLeftAssciationsIDs(service.getID(), Relations.SlmContains);
 		Map<String, Model> assocs = new TreeMap<String, Model>();
-		extracted(assciationsIDs, assocs);
-		assciationsIDs = RelationHelper.getAssciationsIDs(service.getID(), Relations.SlmMonitors);
-		extracted(assciationsIDs, assocs);
+		copyModels(assciationsIDs, assocs);
+		assciationsIDs = RelationHelper.getLeftAssciationsIDs(service.getID(), Relations.SlmMonitors);
+		copyModels(assciationsIDs, assocs);
 		return assocs;
 	}
 
-	private static void extracted(int[] assciationsIDs, Map<String, Model> assocs) throws CsCSpectrumException, SSOrbConnectException {
+	private static void copyModels(int[] assciationsIDs, Map<String, Model> assocs) throws CsCSpectrumException, SSOrbConnectException {
 		for (int i = 0; i < assciationsIDs.length; i++) {
 			Model sm = new ServiceModel(assciationsIDs[i]);
 			if (!sm.getMType().startsWith("SM")) {
@@ -40,6 +40,15 @@ public class ServiceAccess extends ModelAccess {
 			}
 			assocs.put(sm.getName(), sm);
 		}
+	}
+
+	public static Map<String, Model> getGarantee(ServiceModel service) throws CsCSpectrumException, SSOrbConnectException {
+		int[] assciationsIDs = RelationHelper.getRightAssciationsIDs(service.getID(), Relations.SlmIsMeasuredBy);
+		Map<String, Model> assocs = new TreeMap<String, Model>();
+		copyModels(assciationsIDs, assocs);
+		assciationsIDs = RelationHelper.getRightAssciationsIDs(service.getID(), Relations.SlmGuarantees);
+		copyModels(assciationsIDs, assocs);
+		return assocs;
 	}
 
 }

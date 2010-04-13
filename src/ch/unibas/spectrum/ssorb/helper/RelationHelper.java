@@ -30,12 +30,16 @@ public class RelationHelper {
 		return assocModels;
 	}
 
-	public static int[] getAssciationsIDs(int modelID, int relationID) throws CsCSpectrumException, SSOrbConnectException {
+	public static int[] getRightAssciationsIDs(int modelID, int relationID) throws CsCSpectrumException, SSOrbConnectException {
+		return DomainHelper.getModelDomain().getAssocModelIDList(relationID, modelID, CsCSide_e.CSC_RIGHT_SIDE);
+	}
+
+	public static int[] getLeftAssciationsIDs(int modelID, int relationID) throws CsCSpectrumException, SSOrbConnectException {
 		return DomainHelper.getModelDomain().getAssocModelIDList(relationID, modelID, CsCSide_e.CSC_LEFT_SIDE);
 	}
 
 	public static Map<String, Model> getAssciations(int modelID, int relationID) throws CsCSpectrumException, SSOrbConnectException {
-		int[] assocModelIDList = getAssciationsIDs(modelID, relationID);
+		int[] assocModelIDList = getLeftAssciationsIDs(modelID, relationID);
 		Map<String, Model> assocModels = new HashMap<String, Model>(assocModelIDList.length);
 		for (int j = 0; j < assocModelIDList.length; j++) {
 			Model model = new Model(assocModelIDList[j]);

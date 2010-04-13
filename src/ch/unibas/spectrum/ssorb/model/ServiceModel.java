@@ -5,7 +5,9 @@ import java.util.Map;
 
 import ch.unibas.spectrum.ssorb.access.ServiceAccess;
 import ch.unibas.spectrum.ssorb.constants.Attribute;
+import ch.unibas.spectrum.ssorb.exception.SSOrbConnectException;
 
+import com.aprisma.spectrum.core.idl.CsCException.CsCSpectrumException;
 import com.aprisma.spectrum.core.idl.CsCModelDomainPackage.CsCModelProperties;
 
 public class ServiceModel extends Model {
@@ -25,7 +27,7 @@ public class ServiceModel extends Model {
 			return getChildren();
 		}
 		try {
-			return ServiceAccess.getChildren(this);
+			return ServiceAccess.getServiceChildren(this);
 		} catch (Throwable e) {
 			e.printStackTrace();
 			return new HashMap<String, Model>();
@@ -43,20 +45,21 @@ public class ServiceModel extends Model {
 			return -1;
 		}
 	}
-	//
-	// public String getServiceStatusColor() {
-	// // FIXME correct stati numbers
-	// switch (getStatus()) {
-	// case 0:
-	// return "green";
-	// case 1:
-	// return "yellow";
-	// case 2:
-	// return "orange";
-	// case 3:
-	// return "red";
-	// default:
-	// return "gray";
-	// }
-	// }
+
+	public float getAvailability() throws CsCSpectrumException, SSOrbConnectException {
+		float avail = -1;
+		Map<String, Model> garantees = ServiceAccess.getGarantee(this);
+		for (Model garantee : garantees.values()) {
+			System.out.println("g: " + garantee.getName() + "(" + garantee.getMType() + ")");
+			if ("SM_Guarantee".equals(garantee.getMType())) {
+				int activeTime = garantee.getAttributeAsInt(Attribute.ActiveTime);
+				int violationTime = garantee.getAttributeAsTimeTicks(Attribute.ViolationTime);
+				avail = ((activeTime * 1f - violationTime * 1f) / activeTime * 1f) * 100f;
+				System.out.println("at: " + activeTime);
+				System.out.println("vt: " + violationTime);
+				System.out.println(" a: " + avail);
+			}
+		}
+		return avail;
+	}
 }

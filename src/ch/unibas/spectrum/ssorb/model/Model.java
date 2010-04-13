@@ -27,8 +27,8 @@ public class Model {
 
 	public static final int STATUS_UP = 0;
 	public static final int STATUS_DOWN = 1;
-	public static final int STATUS_MINOR = 2;
-	public static final int STATUS_MAJOR = 3;
+	public static final int STATUS_MAJOR = 2;
+	public static final int STATUS_MINOR = 3;
 	public static final int STATUS_MAINTENANCE = 4;
 
 	private int modelID;
@@ -73,9 +73,24 @@ public class Model {
 		return new CsCValue();
 	}
 
-	public int getAttribute(int attrID) {
+	public int getAttributeAsInt(int attrID) {
 		try {
-			return readAttribute(attrID).intValue();
+			CsCValue attribute = readAttribute(attrID);
+			return attribute.intValue();
+		} catch (CsCSpectrumException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SSOrbConnectException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	public int getAttributeAsTimeTicks(int attrID) {
+		try {
+			CsCValue attribute = readAttribute(attrID);
+			return attribute.timeTicks();
 		} catch (CsCSpectrumException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -151,10 +166,10 @@ public class Model {
 	public String getUserStatusColor() {
 		switch (getStatus()) {
 		case STATUS_UP:
+		case STATUS_MINOR:
 			return "green";
 		case STATUS_DOWN:
 			return "red";
-		case STATUS_MINOR:
 		case STATUS_MAJOR:
 			return "yellow";
 		case STATUS_MAINTENANCE:
@@ -167,10 +182,10 @@ public class Model {
 	public String getUserStatusString() {
 		switch (getStatus()) {
 		case STATUS_UP:
+		case STATUS_MINOR:
 			return "Up";
 		case STATUS_DOWN:
 			return "Down";
-		case STATUS_MINOR:
 		case STATUS_MAJOR:
 			return "Degraded";
 		case STATUS_MAINTENANCE:
@@ -232,11 +247,14 @@ public class Model {
 		int[] attrs = { Attribute.ModelName };
 		// int[] attrs = { Attribute.CpuUtilisation };
 
-		CsCAttrReadMode_e[] readModes = { CsCAttrReadMode_e.CSC_MOST_CURRENT };
+		// CsCAttrReadMode_e[] readModes = { CsCAttrReadMode_e.CSC_MOST_CURRENT
+		// };
 
 		Servant callback = new AttrValCallback();
 		CsCAttrValWatchCB cb = CsCAttrValWatchCBHelper.narrow(DomainHelper.getHelper().servant_to_reference(callback));
-		CsCAttrValListOfModels avlm = DomainHelper.getModelDomain().startWatchAttrValsOfModelsByIDs(modelIDs, attrs, readModes, cb);
+		// CsCAttrValListOfModels avlm =
+		// DomainHelper.getModelDomain().startWatchAttrValsOfModelsByIDs(modelIDs,
+		// attrs, readModes, cb);
 		System.out.println("Watching started.. Press Enter to exit");
 		try {
 			System.in.read();
