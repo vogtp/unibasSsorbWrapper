@@ -55,9 +55,9 @@ public class ServiceModel extends Model {
 				int activeTime = garantee.getAttributeAsInt(Attribute.ActiveTime);
 				int violationTime = garantee.getAttributeAsTimeTicks(Attribute.ViolationTime);
 				avail = ((activeTime * 1f - violationTime * 1f) / activeTime * 1f) * 100f;
-				System.out.println("at: " + activeTime);
-				System.out.println("vt: " + violationTime);
-				System.out.println(" a: " + avail);
+				// System.out.println("at: " + activeTime);
+				// System.out.println("vt: " + violationTime);
+				// System.out.println(" a: " + avail);
 			}
 		}
 		return avail;

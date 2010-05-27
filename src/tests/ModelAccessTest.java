@@ -4,6 +4,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 import ch.unibas.spectrum.ssorb.access.ModelAccess;
+import ch.unibas.spectrum.ssorb.constants.Attribute;
 import ch.unibas.spectrum.ssorb.exception.SSOrbConnectException;
 import ch.unibas.spectrum.ssorb.model.Model;
 
@@ -51,5 +52,10 @@ public class ModelAccessTest extends TestCase {
 		Model model = models.get(0);
 		System.out.println("Got model " + model.getName() + " modelId " + Integer.toHexString(model.getID()));
 		model.attrChangeCallback();
+	}
+
+	public void testAPCTemp() throws Exception {
+		int temp = getModel("apc-bernoullistrasse.urz.unibas.ch", 1).get(0).getAttributeFromTable(Attribute.APCTemperature, 2);
+		System.out.println(temp);
 	}
 }

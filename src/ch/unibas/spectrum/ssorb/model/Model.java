@@ -73,6 +73,20 @@ public class Model {
 		return new CsCValue();
 	}
 
+	public int getAttributeFromTable(int attrID, int idx) {
+		try {
+			CsCValue attribute = readAttribute(attrID);
+			return attribute.oidValueList()[idx].intValue();
+		} catch (CsCSpectrumException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SSOrbConnectException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
 	public int getAttributeAsInt(int attrID) {
 		try {
 			CsCValue attribute = readAttribute(attrID);

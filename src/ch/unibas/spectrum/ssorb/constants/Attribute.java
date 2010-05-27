@@ -9,4 +9,6 @@ public class Attribute {
 
 	public static final int ActiveTime = 0x4500029;
 	public static final int ViolationTime = 0x450002b;
+
+	public static final int APCTemperature = 0x21d07ac;
 }
