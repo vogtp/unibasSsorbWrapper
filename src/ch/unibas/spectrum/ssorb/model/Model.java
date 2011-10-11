@@ -44,7 +44,8 @@ public class Model {
 		this.modelProperties = modelProperties;
 	}
 
-	protected CsCValue readAttribute(int attrID) throws CsCSpectrumException, SSOrbConnectException {
+	protected CsCValue readAttribute(int attrID) throws CsCSpectrumException,
+			SSOrbConnectException {
 
 		int[] modelIDList = new int[1];
 		int[] extAttrIDList = new int[1];
@@ -52,7 +53,9 @@ public class Model {
 		extAttrIDList[0] = attrID;
 
 		CsCAttrReadMode_e[] readMode = { CsCAttrReadMode_e.CSC_MOST_CURRENT };
-		CsCAttrValListOfModels avlom = DomainHelper.getModelDomain().readAttrValListOfModelsByIDs(modelIDList, extAttrIDList, readMode);
+		CsCAttrValListOfModels avlom = DomainHelper.getModelDomain()
+				.readAttrValListOfModelsByIDs(modelIDList, extAttrIDList,
+						readMode);
 		if (avlom.error == CsCError_e.SUCCESS) {
 			for (int i = 0; i < avlom.list.length; i++) {
 				CsCModelAttrValList mavl = avlom.list[i];
@@ -73,10 +76,10 @@ public class Model {
 		return new CsCValue();
 	}
 
-	public int getAttributeFromTable(int attrID, int idx) {
+	public String getAttributeFromTable(int attrID, int idx) {
 		try {
 			CsCValue attribute = readAttribute(attrID);
-			return attribute.oidValueList()[idx].intValue();
+			return attributeToString(attribute.oidValueList()[idx]);
 		} catch (CsCSpectrumException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,7 +87,37 @@ public class Model {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return -1;
+		return "n.a.";
+	}
+
+	public String getAttribute(int attrID) {
+		try {
+			CsCValue attribute = readAttribute(attrID);
+			return attributeToString(attribute);
+		} catch (CsCSpectrumException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SSOrbConnectException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "n.a.";
+	}
+
+	private String attributeToString(CsCValue attribute) {
+		try {
+			return attribute.textString();
+		} catch (Throwable t) {
+		}
+		try {
+			return Integer.toString(attribute.intValue());
+		} catch (Throwable t) {
+		}
+		try {
+			return Integer.toString(attribute.timeTicks());
+		} catch (Throwable t) {
+		}
+		return "<!--" + attribute.toString() + "-->";
 	}
 
 	public int getAttributeAsInt(int attrID) {
@@ -131,9 +164,11 @@ public class Model {
 		return getModelProperties().mTypeName;
 	}
 
-	protected CsCModelProperties getModelProperties() throws CsCSpectrumException, SSOrbConnectException {
+	protected CsCModelProperties getModelProperties()
+			throws CsCSpectrumException, SSOrbConnectException {
 		if (modelProperties == null) {
-			modelProperties = DomainHelper.getModelDomain().getModelProperties(modelID);
+			modelProperties = DomainHelper.getModelDomain().getModelProperties(
+					modelID);
 		}
 		return modelProperties;
 	}
@@ -254,7 +289,8 @@ public class Model {
 		return -1;
 	}
 
-	public void attrChangeCallback() throws SSOrbConnectException, CsCSpectrumException {
+	public void attrChangeCallback() throws SSOrbConnectException,
+			CsCSpectrumException {
 		int[] modelIDs = { modelID };
 		// Model name 0x1006e attribute will be requested back when
 		// the callback triggers
@@ -265,7 +301,8 @@ public class Model {
 		// };
 
 		Servant callback = new AttrValCallback();
-		CsCAttrValWatchCB cb = CsCAttrValWatchCBHelper.narrow(DomainHelper.getHelper().servant_to_reference(callback));
+		CsCAttrValWatchCB cb = CsCAttrValWatchCBHelper.narrow(DomainHelper
+				.getHelper().servant_to_reference(callback));
 		// CsCAttrValListOfModels avlm =
 		// DomainHelper.getModelDomain().startWatchAttrValsOfModelsByIDs(modelIDs,
 		// attrs, readModes, cb);
@@ -276,6 +313,7 @@ public class Model {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DomainHelper.getModelDomain().stopWatchAttrValsOfModelsByIDs(cb, attrs, modelIDs);
+		DomainHelper.getModelDomain().stopWatchAttrValsOfModelsByIDs(cb, attrs,
+				modelIDs);
 	}
 }

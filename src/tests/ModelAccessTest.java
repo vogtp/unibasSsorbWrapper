@@ -16,7 +16,8 @@ public class ModelAccessTest extends TestCase {
 		super.setUp();
 	}
 
-	private List<Model> getModel(String modelname, int cnt) throws CsCSpectrumException, SSOrbConnectException {
+	private List<Model> getModel(String modelname, int cnt)
+			throws CsCSpectrumException, SSOrbConnectException {
 		List<Model> models = ModelAccess.getModelByName(modelname);
 		assertEquals(cnt, models.size());
 		for (Model e : models) {
@@ -26,7 +27,8 @@ public class ModelAccessTest extends TestCase {
 		return models;
 	}
 
-	public void testGetModelByName() throws CsCSpectrumException, SSOrbConnectException {
+	public void testGetModelByName() throws CsCSpectrumException,
+			SSOrbConnectException {
 		getModel("imap", 1);
 		getModel("EVA", 4);
 	}
@@ -38,7 +40,8 @@ public class ModelAccessTest extends TestCase {
 		assertEquals("Host_Device", models.get(0).getMType());
 	}
 
-	public void testModelIdByName() throws CsCSpectrumException, SSOrbConnectException {
+	public void testModelIdByName() throws CsCSpectrumException,
+			SSOrbConnectException {
 		String modelname = "imap";
 		int[] models = ModelAccess.getModelIDsByName(modelname);
 		assertEquals(1, models.length);
@@ -50,12 +53,14 @@ public class ModelAccessTest extends TestCase {
 		String modelname = "File Applmon1";
 		List<Model> models = ModelAccess.getModelByName(modelname);
 		Model model = models.get(0);
-		System.out.println("Got model " + model.getName() + " modelId " + Integer.toHexString(model.getID()));
+		System.out.println("Got model " + model.getName() + " modelId "
+				+ Integer.toHexString(model.getID()));
 		model.attrChangeCallback();
 	}
 
 	public void testAPCTemp() throws Exception {
-		int temp = getModel("apc-bernoullistrasse.urz.unibas.ch", 1).get(0).getAttributeFromTable(Attribute.APCTemperature, 2);
+		String temp = getModel("apc-bernoullistrasse.urz.unibas.ch", 1).get(0)
+				.getAttributeFromTable(Attribute.APCTemperature, 2);
 		System.out.println(temp);
 	}
 }

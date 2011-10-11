@@ -7,8 +7,13 @@ public class Attribute {
 	public static final int RMCondition = 0x12a40;
 	public static final int CpuUtilisation = 0x12aaa;
 
+	public static final int DeviceLocation = 0x1102e;
+
 	public static final int ActiveTime = 0x4500029;
 	public static final int ViolationTime = 0x450002b;
 
 	public static final int APCTemperature = 0x21d07ac;
+	public static final int APCTemperatureHighTresh = 0x21d0782;
+	public static final int APCTemperatureUPS = 0x21d0569;
+	public static final int APCTemperatureUpsHighTresh = 0x21d0554;
 }
