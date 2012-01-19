@@ -22,7 +22,7 @@ public class ServiceTest extends TestCase {
 		DomainHelper.setSpectroServer("spectrum");
 		DomainHelper.setUsername("ServiceStatus");
 		// DomainHelper.setUsername("vogtpNetwork");
-		// DomainHelper.setPassword("pw");
+		// DomainHelper.setPassword("password");
 
 		root = (ServiceModel) ServiceAccess.getRoot();
 	}

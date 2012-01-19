@@ -76,6 +76,25 @@ public class Model {
 		return new CsCValue();
 	}
 
+	public String[] getAttributeTable(int attrID) {
+		try {
+			CsCValue attribute = readAttribute(attrID);
+			CsCValue[] oidValueList = attribute.oidValueList();
+			String[] ret = new String[oidValueList.length];
+			for (int i = 0; i < oidValueList.length; i++) {
+				ret[i] = attributeToString(oidValueList[i]);
+			}
+			return ret;
+		} catch (CsCSpectrumException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SSOrbConnectException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public String getAttributeFromTable(int attrID, int idx) {
 		try {
 			CsCValue attribute = readAttribute(attrID);

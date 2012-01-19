@@ -3,7 +3,6 @@ package ch.unibas.spectrum.ssorb.helper;
 import java.util.Properties;
 
 import ch.unibas.spectrum.ssorb.exception.SSOrbConnectException;
-import ch.unibas.spectrum.ssorb.logger.Log;
 
 import com.aprisma.spectrum.core.idl.CsCModelDomain;
 import com.aprisma.util.corba.CORBAHelper;
@@ -29,13 +28,9 @@ public class DomainHelper {
 		}
 		if (props == null) {
 			props = new Properties();
+			props.put("ORBwarn", "2");
 		}
 		props.setProperty(key, value);
-		try {
-			initHelper();
-		} catch (SSOrbConnectException e) {
-			Log.warning(e, "Error setting property");
-		}
 	}
 
 	public static CORBAHelper getHelper() throws SSOrbConnectException {
@@ -51,14 +46,15 @@ public class DomainHelper {
 
 	private static void initHelper() throws SSOrbConnectException {
 		if (helper == null) {
-			helper = DomainHelper.getHelper();
+			return;
 		}
-		if (helper == null || !helper.init(null, props)) {
+		if (!helper.init(null, props)) {
 			throw new SSOrbConnectException("Cannot Initalise helper");
 		}
 	}
 
-	public static CsCModelDomain getModelDomain(String spectroServer) throws SSOrbConnectException {
+	public static CsCModelDomain getModelDomain(String spectroServer)
+			throws SSOrbConnectException {
 		if (spectroServer != null) {
 			setSpectroServer(spectroServer);
 		}
@@ -69,7 +65,9 @@ public class DomainHelper {
 		if (modelDomain == null) {
 			// FIXME make domain a parameter
 			try {
-				modelDomain = (CsCModelDomain) getHelper().getObjectImplementation(CsCModelDomain.class, getSpectroServer());
+				modelDomain = (CsCModelDomain) getHelper()
+						.getObjectImplementation(CsCModelDomain.class,
+								getSpectroServer());
 			} catch (Throwable e) {
 				throw new SSOrbConnectException(e);
 			}

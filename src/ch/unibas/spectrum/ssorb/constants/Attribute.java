@@ -8,6 +8,7 @@ public class Attribute {
 	public static final int CpuUtilisation = 0x12aaa;
 
 	public static final int DeviceLocation = 0x1102e;
+	public static final int Description = 0x12a4b;
 
 	public static final int ActiveTime = 0x4500029;
 	public static final int ViolationTime = 0x450002b;

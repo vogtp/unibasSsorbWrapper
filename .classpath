@@ -2,35 +2,24 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry kind="lib" path="lib/clientapp.jar"/>
-	<classpathentry kind="lib" path="lib/ems90.jar"/>
-	<classpathentry kind="lib" path="lib/global90.jar"/>
-	<classpathentry kind="lib" path="lib/jsafeJCEFIPS.jar"/>
-	<classpathentry kind="lib" path="lib/lm.jar"/>
-	<classpathentry kind="lib" path="lib/mindterm.jar"/>
-	<classpathentry kind="lib" path="lib/mte.jar"/>
-	<classpathentry kind="lib" path="lib/ncm90.jar"/>
-	<classpathentry kind="lib" path="lib/omi90.jar"/>
-	<classpathentry kind="lib" path="lib/processd.jar"/>
-	<classpathentry kind="lib" path="lib/productsuite90.jar"/>
-	<classpathentry kind="lib" path="lib/sanct6.jar"/>
-	<classpathentry kind="lib" path="lib/sanctuary.jar"/>
-	<classpathentry kind="lib" path="lib/sbgwimport90.jar"/>
-	<classpathentry kind="lib" path="lib/snmpsrv90.jar"/>
-	<classpathentry kind="lib" path="lib/ssorb90.jar"/>
-	<classpathentry kind="lib" path="lib/ssorbutil90.jar"/>
-	<classpathentry kind="lib" path="lib/util90.jar"/>
-	<classpathentry kind="lib" path="lib/utilapp90.jar"/>
-	<classpathentry kind="lib" path="lib/utilgui90.jar"/>
-	<classpathentry kind="lib" path="lib/utilnet90.jar"/>
-	<classpathentry kind="lib" path="lib/utilsrv90.jar"/>
-	<classpathentry kind="lib" path="lib/vbhelper90.jar"/>
-	<classpathentry kind="lib" path="lib/vbjorb.jar"/>
-	<classpathentry kind="lib" path="lib/vbsec.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="lib/global92.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jsafeJCEFIPS.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/lm.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/sanct6.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/sanctuary.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/ssorb92.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/ssorbutil92.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/util92.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/utilapp92.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/utilnet92.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/utilsrv92.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/vbhelper92.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/vbjorb.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/vbsec.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
